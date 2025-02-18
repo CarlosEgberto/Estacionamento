@@ -1,34 +1,219 @@
-.grid>*{
-    min-height: 100px;
-    border-radius: 4px;
+/* style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f0f2f5;
+}
+
+.container {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgb(255, 255, 255);
+    min-height: 100vh;
 }
 
-nav{
-    background-color: rgb(189, 189, 189);
-}
-
-nav> a{
-    text-decoration: none;
+.sidebar {
+    width: 300px;
+    background: #2c3e50;
+    padding: 20px;
     color: white;
-    padding-right: 20px;
+    
 }
 
-header{
-    background-color:rgb(68, 68, 68) ;
+
+.sidebar h2 {
+    margin-bottom: 20px;
+    color: #e0e0e0;
+    font: bold 20pt monospace;
 }
 
-main{
-    background-color: rgb(224, 203, 203);
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font: bold 18pt monospace;
 }
 
-.lateral{
-    background-color: rgb(158, 153, 153);
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
-footer{
-    background-color: rgb(189, 189, 189);
+.form-group label {
+    font-size: 0.9em;
+    color: #bdc3c7;
+}
+
+input {
+    padding: 8px;
+    border: 1px solid #34495e;
+    border-radius: 4px;
+    background: #34495e;
+    color: white;
+}
+
+.btn-salvar {
+    background: #27ae60;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-salvar:hover {
+    background: #219a52;
+}
+
+.content {
+    flex: 1;
+    padding: 30px;
+    background: white;
+}
+.content>h1{
+    text-align: center;
+}
+
+.veiculos-list {
+    display: grid;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.vehicle-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    transition: transform 0.2s;
+}
+
+.vehicle-card:hover {
+    transform: translateX(5px);
+}
+
+.vehicle-card.selected {
+    background: #e3f2fd;
+    border-color: #2196f3;
+}
+
+.vehicle-info {
+    flex: 1;
+}
+
+.vehicle-info div {
+    margin: 3px 0;
+}
+
+.btn-selecionar {
+    background: #2196f3;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.saida-container {
+    margin-top: 30px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.selected-vehicle {
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    margin: 15px 0;
+}
+
+.btn-finalizar {
+    background: #e74c3c;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.time-info {
+    margin-top: 15px;
+    font-size: 0.9em;
+    color: #666;
+}
+/* Adicione ao CSS */
+.comprovante-hidden {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.comprovante {
+    position: relative;
+    width: 300px;
+    padding: 20px;
+    background: white;
+    margin: 50px auto;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.info-comprovante {
+    margin: 15px 0;
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.info-comprovante p {
+    margin: 5px 0;
+}
+
+#barcode {
+    margin: 15px 0;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    
+    .comprovante,
+    .comprovante * {
+        visibility: visible;
+    }
+    
+    .comprovante {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        box-shadow: none;
+    }
+    
+    button {
+        display: none !important;
+    }
+    
+    #barcode {
+        transform: scale(1.2);
+        margin: 20px auto;
+    }
 }
