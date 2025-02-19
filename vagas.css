@@ -14,9 +14,9 @@
 
 .mapa-vagas {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     gap: 10px;
-    width: 50vh; /* Largura ajustada para melhor visualização */
+    width: 70vh; /* Largura ajustada para melhor visualização */
     margin: 10px auto;
 }
 
