@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios</title>
+    <link rel="stylesheet" href="css/relatorios.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Relatórios Mensais</h1>
+        
+        <!-- Total Arrecadado -->
+        <section class="total-arrecadado">
+            <h2>Total Arrecadado</h2>
+            <div id="totalMes"></div>
+        </section>
+
+        <!-- Histórico de Veículos -->
+        <section class="historico-veiculos">
+            <h2>Histórico de Veículos</h2>
+            <input type="text" id="pesquisaPlaca" placeholder="Digite a placa">
+            <button onclick="pesquisarVeiculo()">Pesquisar</button>
+            <div id="resultadoPesquisa"></div>
+        </section>
+    </div>
+
+    <script src="js/relatorios.js"></script>
+</body>
+</html>

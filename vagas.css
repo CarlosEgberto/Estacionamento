@@ -1,0 +1,47 @@
+*{
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+.mapa-vagas {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    width: 100vh;
+    margin: 10px auto;
+}
+
+.vaga {
+    padding: 15px 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.vaga.ocupada {
+    background-color: #ffebee;
+    border-color: #e57373;
+}
+
+.resumo-vagas {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+nav{
+    display: grid;
+    padding-top: 5px;
+    width: 50vh;
+    align-items: center;
+    align-content: center;
+    margin: 10px auto;
+}
+nav>a{
+    text-decoration: none;
+    background-color: rgb(21, 21, 87);
+    color: #fff;
+    padding: 15px 5px;
+    margin-top: 30px;
+    border-radius: 15px;
+    text-align: center;
+}
