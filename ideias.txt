@@ -1,0 +1,17 @@
+- uma pagina para receber o total arrecadado no mês.
+	explicaçao: nesta pagina seria salvo o valor de cada carro que ja foi finalizado por mes,
+	com formataçao sempelhante da pagina onde na parte que seria o cadastro da pagina principal
+	fique a transiçao entre as paginas. deve ser criado um js separado para nao atrapalhar o 
+	andamento do programa principal.
+- um historico de vezes que um mesmo veiculo parou.
+	explicaçao: na mesma pagina que tera o total deve ser criado um registro com a quantidade de
+	vezes que cada veiculo parou e as datas sendo consultavel por um input de pesquisa e um botao 
+	de nome (pesquisar),. pode ser usado o mesmo js do total acima.
+	
+- posiçao da vaga que esta estacionado, considerando que nao pode estacionar em vaga ocupada.
+	explicaçao: cada veiculo devera ter um campo depois de adicionado para escrever em qual vaga 
+	foi adicionado para isto na pagina principal os registros de entrada devem ser editaveis.
+- levantamento de vagas ocupadas e vagas livres.
+	explicaçao: uma terceira pagina que servirá apenas para saber quais vagas estao ocupadas para 
+	garantir que a lotaçao maxima nao seja excedida, deve ter uma forma visual de representar as vagas
+	ocupadas e as vagas vazias(fique a vontade para criar da melhor forma que conseguir, use criatividade)
