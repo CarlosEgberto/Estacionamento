@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,23 +8,27 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 </head>
+
 <body>
     <div class="container">
-        <!-- Sidebar para Adicionar Veículos -->
         <aside class="sidebar">
             <h2>ADICIONAR VEÍCULO</h2>
             <div class="form-container">
                 <div class="form-group">
-                    <label>Modelo:</label>
-                    <input type="text" id="modelo" required>
+                    <label for="modelo">Modelo:</label>
+                    <input type="text" id="modelo" name="modelo" required>
                 </div>
                 <div class="form-group">
-                    <label>Placa:</label>
-                    <input type="text" id="placa" pattern="[A-Za-z]{3}-?\d[A-Za-z0-9]{3}" required>
+                    <label for="placa">Placa:</label>
+                    <input type="text" id="placa" name="placa" pattern="[A-Za-z]{3}-?\d[A-Za-z0-9]{3}" required>
                 </div>
                 <div class="form-group">
-                    <label>Cor:</label>
-                    <input type="text" id="cor" required>
+                    <label for="cor">Cor:</label>
+                    <input type="text" id="cor" name="cor" required>
+                </div>
+                <div class="form-group">
+                    <label for="vaga">Vaga:</label>
+                    <input type="text" id="vaga" name="vaga" required>
                 </div>
                 <button class="btn-salvar" onclick="adicionarCarro()">SALVAR</button>
             </div>
@@ -33,21 +38,23 @@
             </nav>
         </aside>
 
-        <!-- Conteúdo Principal -->
         <main class="content">
             <h1>CARROS NO PÁTIO</h1>
-            
-            <div class="veiculos-list" id="veiculosList">
-                <!-- Veículos serão carregados aqui -->
-            </div>
 
+            <div class="veiculos-list" id="veiculosList">
+                </div>
+            <div class="vagas-info">
+                <p id="vagasOcupadas">Vagas ocupadas: 0</p>
+                <p id="vagasLivres">Vagas livres: 50</p>
+            </div>
             <div class="saida-container">
                 <h2>REGISTRAR SAÍDA</h2>
                 <div class="selected-vehicle" id="selectedVehicle">
                     Nenhum veículo selecionado
                 </div>
                 <div class="time-info">
-                    <button class="btn-finalizar" onclick="registrarSaida()">FINALIZAR ESTACIONAMENTO</button>
+                    <button class="btn-finalizar" onclick="registrarSaida()">FINALIZAR
+                        ESTACIONAMENTO</button>
                     <div id="tempoPermanencia"></div>
                     <div id="valorCobranca"></div>
                 </div>
@@ -72,4 +79,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

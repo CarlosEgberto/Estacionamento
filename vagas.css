@@ -1,22 +1,30 @@
-*{
+* {
     align-items: center;
     align-content: center;
     text-align: center;
+}
+
+.container { /* Adicionado para centralizar o conteúdo */
+    display: flex;
+    flex-direction: column; /* Alinha os itens verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    min-height: 100vh; /* Garante altura mínima para ocupar a tela toda */
+    justify-content: center; /* Centraliza verticalmente */
 }
 
 .mapa-vagas {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
-    width: 100vh;
+    width: 50vh; /* Largura ajustada para melhor visualização */
     margin: 10px auto;
 }
 
 .vaga {
-    padding: 15px 5px;
+    padding: 15px 2px;
     border: 1px solid #ccc;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 15px;
 }
 
 .vaga.ocupada {
@@ -27,8 +35,22 @@
 .resumo-vagas {
     margin-top: 20px;
     font-size: 1.2em;
+    display: flex; /* Para alinhar os itens lado a lado */
+    justify-content: center; /* Centraliza os itens horizontalmente */
 }
-nav{
+
+.status-vagas { /* Estilos para o container colorido */
+    background-color: #c8e6c9; /* Verde claro */
+    color: #002502; /* Verde escuro para o texto */
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 0 10px; /* Espaçamento entre os blocos de vagas */
+    display: flex;
+    flex-direction: column; /* Para alinhar os itens verticalmente */
+    align-items: center; /* Centraliza os itens horizontalmente */
+}
+
+nav {
     display: grid;
     padding-top: 5px;
     width: 50vh;
@@ -36,7 +58,8 @@ nav{
     align-content: center;
     margin: 10px auto;
 }
-nav>a{
+
+nav>a {
     text-decoration: none;
     background-color: rgb(21, 21, 87);
     color: #fff;

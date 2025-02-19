@@ -1,4 +1,3 @@
-// script.js
 let selectedVehicle = null;
 let vehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
 let idCounter = parseInt(localStorage.getItem('idCounter')) || 1000;
@@ -14,9 +13,9 @@ function gerarID() {
 
 // Função principal para adicionar veículos
 function adicionarCarro() {
-    const modelo = document.getElementById('modelo').value;
+    const modelo = document.getElementById('modelo').value.toUpperCase();
     const placa = document.getElementById('placa').value.toUpperCase().replace(/-/g, '');
-    const cor = document.getElementById('cor').value;
+    const cor = document.getElementById('cor').value.toUpperCase();
     const vaga = document.getElementById('vaga').value;
 
     // Validação dos campos
@@ -63,7 +62,7 @@ function adicionarCarro() {
 
 // Formatar placa automática
 function formatarPlaca(placa) {
-    const placaFormatada = placa.replace(/([A-Za-z]{3})([0-9]{1})([A-Za-z0-9]{3})/, '$1$2-$3');
+    const placaFormatada = placa.replace(/([A-Za-z]{3})([0-9]{0})([A-Za-z0-9]{4})/, '$1$2-$3');
     return placaFormatada.slice(0, 8);
 }
 
@@ -214,8 +213,15 @@ function calcularValor(horas, minutos) {
 // Atualizar contador de vagas
 function atualizarContadorVagas() {
     const vagasOcupadas = vehicles.filter(v => v.ativo).length;
-    document.getElementById('vagasOcupadas').textContent = `Vagas ocupadas: ${vagasOcupadas}`;
-    document.getElementById('vagasLivres').textContent = `Vagas livres: ${totalVagas - vagasOcupadas}`;
+    
+    // Verifica se os elementos existem antes de atualizar
+    const vagasOcupadasElement = document.getElementById('vagasOcupadas');
+    const vagasLivresElement = document.getElementById('vagasLivres');
+    
+    if (vagasOcupadasElement && vagasLivresElement) {
+        vagasOcupadasElement.textContent = `Vagas ocupadas: ${vagasOcupadas}`;
+        vagasLivresElement.textContent = `Vagas livres: ${totalVagas - vagasOcupadas}`;
+    }
 }
 
 // Inicialização

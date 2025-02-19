@@ -120,6 +120,16 @@ input {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin: 10px;
+}
+
+.btn-editar{
+    background: #f76262;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .saida-container {
@@ -202,6 +212,19 @@ nav>a{
     margin-top: 30px;
     border-radius: 15px;
     text-align: center;
+}
+.vagas-info {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.vagas-info p {
+    margin: 5px 0;
+    font-weight: bold;
+    color: #333;
 }
 
 @media print {
