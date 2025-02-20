@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const pesquisaPlaca = document.getElementById('pesquisaPlaca');
     pesquisaPlaca.addEventListener('input', filtrarListaVeiculos);
+
+    const botaoApagarRegistro = document.getElementById('botaoApagarRegistro');
+    botaoApagarRegistro.addEventListener('click', apagarTudo);
 });
 
 function calcularTotalArrecadado() {
@@ -66,69 +69,11 @@ function ultimaEntrada(vehicle) {
     return '-';
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    calcularTotalArrecadado();
-    carregarListaVeiculos();
-
-    const pesquisaPlaca = document.getElementById('pesquisaPlaca');
-    pesquisaPlaca.addEventListener('input', filtrarListaVeiculos);
-});
-
-// ... (funções calcularTotalArrecadado, carregarListaVeiculos, filtrarListaVeiculos, ultimaEntrada)
-
-function exibirHistorico(placa) {
-    const vehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
-    const veiculoEncontrado = vehicles.find(v => v.placa === placa);
-
-    const resultadoPesquisa = document.getElementById('resultadoPesquisa');
-    resultadoPesquisa.innerHTML = '';
-
-    if (veiculoEncontrado) {
-        const detalhesVeiculo = document.createElement('div');
-        detalhesVeiculo.innerHTML = `<h3>${veiculoEncontrado.modelo}</h3><p>Placa: ${veiculoEncontrado.placa}</p><p>Cor: ${veiculoEncontrado.cor}</p><p>Vaga: ${veiculoEncontrado.vaga}</p>`;
-        resultadoPesquisa.appendChild(detalhesVeiculo);
-
-        if (veiculoEncontrado.historico && veiculoEncontrado.historico.length > 0) {
-            const tabelaHistorico = document.createElement('table');
-            tabelaHistorico.innerHTML = `
-                <thead id="tabela-pesquisa">
-                    <tr>
-                        <th>Data</th>
-                        <th>Entrada</th>
-                        <th>Saída</th>
-                        <th>Valor</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            `;
-            resultadoPesquisa.appendChild(tabelaHistorico);
-
-            const tbody = tabelaHistorico.querySelector('tbody');
-            veiculoEncontrado.historico.forEach(registro => {
-                const linha = tbody.insertRow();
-                linha.innerHTML = `
-                    <td>${registro.data || new Date(registro.entradaTimestamp).toLocaleDateString('pt-BR')}</td>
-                    <td>${registro.entrada}</td>
-                    <td>${registro.saida || '-'}</td>
-                    <td>${registro.valor ? `R$ ${registro.valor.toFixed(2)}` : '-'}</td>
-                    <td><button data-entrada="${registro.entrada}" onclick="excluirRegistro('${placa}', this.dataset.entrada)">Excluir</button></td>
-                `;
-            });
-        }
-    }
-}
-const botaoApagarRegistro = document.getElementById('botaoApagarRegistro')
-
 function apagarTudo() {
     localStorage.removeItem('vehicles');
     localStorage.removeItem('idCounter');
-    carregarListaVeiculos()
+    carregarListaVeiculos();
 }
-
-// Adiciona os eventos de clique aos botões.
-botaoApagarRegistro.addEventListener('click', apagarTudo);
-
 
 function excluirRegistro(placa, entrada) {
     const vehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
@@ -137,9 +82,7 @@ function excluirRegistro(placa, entrada) {
     if (veiculo && veiculo.historico) {
         veiculo.historico = veiculo.historico.filter(r => r.entrada !== entrada);
         localStorage.setItem('vehicles', JSON.stringify(vehicles));
-        exibirHistorico(placa);
         calcularTotalArrecadado();
-        carregarListaVeiculos(); // Atualiza a lista de veículos
+        carregarListaVeiculos();
     }
-    carregarListaVeiculos()
 }

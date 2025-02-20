@@ -5,30 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Vagas</title>
-    <link rel="stylesheet" href="vagas.css">
+    <link rel="stylesheet" href="assets/Css/vagas.css">
 </head>
 
 <body>
     <div class="container">
-        <h1>Controle de Vagas</h1>
+        <aside class="sidebar">
+            <nav class="menu">
+                <a href="index.html">Estacionamento</a>
+                <a href="relatorios.html">Relatórios</a>
+            </nav>
 
-        <div class="mapa-vagas" id="mapaVagas">
+            <div class="resumo-vagas">
+                <div class="status-vagas">  <p>Vagas:</p> <p>Ocupadas: <span id="vagasOcupadas">0</span></p>
+                    <p> Livres: <span id="vagasLivres">0</span></p>
+                </div>
+
+        </aside>
+
+        <main class="content">
+            <h1>Controle de Vagas</h1>
+
+            <div class="mapa-vagas" id="mapaVagas">
             </div>
-
-        <div class="resumo-vagas">
-            <div class="status-vagas">  <p>Vagas Ocupadas: <span id="vagasOcupadas">0</span></p>
-                <p>Vagas Livres: <span id="vagasLivres">0</span></p>
-            </div>
-        </div>
-
-        <nav class="menu">
-            <a href="index.html">Estacionamento</a>
-            <a href="relatorios.html">Relatórios</a>
-        </nav>
+        </main>
+        
 
     </div>
 
-    <script src="vagas.js"></script>
+    <script src="assets/Js/vagas.js"></script>
 </body>
 
 </html>

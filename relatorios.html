@@ -5,33 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatórios</title>
-    <link rel="stylesheet" href="relatorios.css">
+    <link rel="stylesheet" href="assets/Css/relatorios.css">
 </head>
 
 <body>
     <div class="container">
-        <h1>Relatórios Mensais</h1>
+        <aside class="sidebar">
+            <nav class="menu">
+                <a href="index.html">Estacionamento</a>
+                <a href="vagas.html">Controle de Vagas</a>
+            </nav>
+            <button id="botaoApagarRegistro"> Apagar Registros</button>
+            <section class="total-arrecadado">
+                <h2>Total Arrecadado</h2>
+                <div id="totalMes"></div>
+            </section>
+        </aside>
 
-        <section class="total-arrecadado">
-            <h2>Total Arrecadado</h2>
-            <div id="totalMes"></div>
-        </section>
+        <main class="content">
+            <h1>Relatórios Mensais</h1>
 
-        <section class="lista-veiculos">
-            <h2>Lista de Veículos</h2>
-            <input type="text" id="pesquisaPlaca" placeholder="Digite a placa">
-            <div id="listaVeiculos"></div>
-        </section>
-
-        <nav class="menu">
-            <a href="index.html">Estacionamento</a>
-            <a href="vagas.html">Controle de Vagas</a>
-        </nav>
-        <button id="botaoApagarRegistro"> Apagar Registros</button>
-        </div>
+            <section class="lista-veiculos">
+                <h2>Lista de Veículos</h2>
+                <input type="text" id="pesquisaPlaca" placeholder="Digite a placa">
+                <div id="listaVeiculos"></div>
+            </section>
+        </main>
     </div>
 
-    <script src="relatorios.js"></script>
+    <script src="assets/Js/relatorios.js"></script>
 </body>
 
 </html>

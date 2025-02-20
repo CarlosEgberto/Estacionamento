@@ -1,0 +1,175 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f0f2f5;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 300px;
+    background: #2c3e50;
+    padding: 20px;
+    color: white;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+    color: #e0e0e0;
+    font: bold 20pt monospace;
+}
+
+nav {
+    display: grid;
+    padding-top: 40px;
+    gap: 15px;
+}
+
+nav>a {
+    text-decoration: none;
+    background-color: rgb(21, 21, 87);
+    color: #fff;
+    padding: 15px 5px;
+    border-radius: 15px;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+nav>a:hover {
+    opacity: 0.7;
+    background-color: rgb(69, 69, 192);
+}
+
+.content {
+    flex: 1;
+    padding: 30px;
+    background: white;
+}
+
+.content>h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 30pt;
+}
+
+.mapa-vagas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.vaga {
+    padding: 15px 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    transition: transform 0.2s;
+}
+
+.vaga:hover {
+    transform: translateX(5px);
+}
+#vagasOcupadas{
+    color: red;
+}
+#vagasLivres{
+    color: rgb(2, 187, 2);
+}
+.vaga.ocupada {
+    background-color: #ffebee;
+    border-color: #e57373;
+}
+
+.resumo-vagas {
+    font-size: 1.1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.status-vagas {
+    background-color: #c8e6c9;
+    color: #002502;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px auto;
+    padding: 35px;
+    text-align: center;
+    font:bold 1.4rem arial;
+}
+
+.vagas-info {
+    margin: 20px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.vagas-info p {
+    margin: 5px 0;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 1200px) {
+    .sidebar {
+        width: 250px;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+
+    .mapa-vagas {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .mapa-vagas {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .vaga {
+        padding: 10px 2px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .mapa-vagas {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .content>h1 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+}

@@ -1,0 +1,196 @@
+/* Estilos gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f0f2f5;
+    color: #333;
+}
+
+#listaVeiculos {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Cria 5 colunas de tamanho igual */
+    gap: 15px; /* Espaçamento entre os itens */
+    padding: 20px; /* Espaçamento interno do container */
+}
+
+.veiculo-item {
+    text-align: center;
+    box-shadow: 1px 2px 4px rgba(22, 0, 0, 0.288);
+    border-radius: 10px;
+    padding: 20px; /* Espaçamento interno do item */
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 300px;
+    background: #2c3e50;
+    padding: 20px;
+    color: white;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+    color: #052700;
+    font: bold 20pt monospace;
+}
+
+nav {
+    display: grid;
+    padding-top: 40px;
+    gap: 15px;
+}
+
+nav>a {
+    text-decoration: none;
+    background-color: rgb(21, 21, 87);
+    color: #fff;
+    padding: 15px 5px;
+    border-radius: 15px;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+nav>a:hover {
+    opacity: 0.7;
+    background-color: rgb(69, 69, 192);
+}
+
+.content {
+    flex: 1;
+    padding: 30px;
+    background: white;
+}
+
+.content>h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 30pt;
+}
+
+/* Estilos para total arrecadado */
+.total-arrecadado {
+    margin: 70px auto 0px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+#totalMes {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #27ae60;
+}
+
+/* Estilos para lista de veículos */
+#pesquisaPlaca {
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    width: 60%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 1em;
+}
+
+#botaoApagarRegistro {
+    background: #d65353;
+    color: white;
+    display: block;
+    margin: 30px auto;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-size: 1em;
+}
+
+#botaoApagarRegistro:hover {
+    background: #b84545;
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 1200px) {
+    .sidebar {
+        width: 250px;
+    }
+    #listaVeiculos {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* Cria 3 colunas de tamanho igual */
+        gap: 15px; /* Espaçamento entre os itens */
+        padding: 20px; /* Espaçamento interno do container */
+    }
+    
+    .veiculo-item {
+        text-align: center;
+        box-shadow: 1px 2px 4px rgba(22, 0, 0, 0.288);
+        border-radius: 10px;
+        padding: 20px; /* Espaçamento interno do item */
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+
+    #pesquisaPlaca {
+        width: 80%;
+    }
+
+    #listaVeiculos {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Cria 3 colunas de tamanho igual */
+        gap: 15px; /* Espaçamento entre os itens */
+        padding: 20px; /* Espaçamento interno do container */
+    }
+    
+    .veiculo-item {
+        text-align: center;
+        box-shadow: 1px 2px 4px rgba(22, 0, 0, 0.288);
+        border-radius: 10px;
+        padding: 20px; /* Espaçamento interno do item */
+    }
+}
+
+@media (max-width: 768px) {
+    .content>h1 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    #listaVeiculos {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Cria 3 colunas de tamanho igual */
+        gap: 15px; /* Espaçamento entre os itens */
+        padding: 20px; /* Espaçamento interno do container */
+    }
+    
+    .veiculo-item {
+        text-align: center;
+        box-shadow: 1px 2px 4px rgba(22, 0, 0, 0.288);
+        border-radius: 10px;
+        padding: 20px; /* Espaçamento interno do item */
+    }
+}

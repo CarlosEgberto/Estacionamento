@@ -25,9 +25,10 @@ body {
 
 
 .sidebar h2 {
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     color: #e0e0e0;
-    font: bold 20pt monospace;
+    font: bold 22pt monospace;
+    text-align: center;
 }
 
 .form-container {
@@ -82,6 +83,7 @@ input {
 .veiculos-list {
     display: grid;
     gap: 15px;
+    grid-template-columns: repeat(4, 1fr);
     margin-top: 20px;
 }
 
@@ -213,6 +215,10 @@ nav>a{
     border-radius: 15px;
     text-align: center;
 }
+nav>a:hover{
+    opacity: 0.7;
+    background-color: rgb(69, 69, 192);
+}
 .vagas-info {
     margin: 20px 0;
     padding: 15px;
@@ -252,5 +258,50 @@ nav>a{
     #barcode {
         transform: scale(1.2);
         margin: 20px auto;
+    }
+}
+@media (max-width: 1600px) {
+    .veiculos-list {
+        display: grid;
+        gap: 15px;
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: 20px;
+    }
+    .sidebar {
+        width: 280px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .veiculos-list {
+        display: grid;
+        gap: 15px;
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: 20px;
+    }
+    .sidebar {
+        width: 250px;
+    }
+    
+}
+
+@media (max-width: 900px) {
+    .veiculos-list {
+        display: grid;
+        gap: 15px;
+        grid-template-columns: repeat(1, 1fr);
+        margin-top: 20px;
+    }
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .content {
+        padding: 1rem;
     }
 }

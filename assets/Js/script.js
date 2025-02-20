@@ -16,7 +16,7 @@ function adicionarCarro() {
     const modelo = document.getElementById('modelo').value.toUpperCase();
     const placa = document.getElementById('placa').value.toUpperCase().replace(/-/g, '');
     const cor = document.getElementById('cor').value.toUpperCase();
-    const vaga = document.getElementById('vaga').value;
+    const vaga = document.getElementById('vaga').value.padStart(2,0);
 
     // Validação dos campos
     if (!modelo || !placa || !cor || !vaga) {
@@ -27,6 +27,11 @@ function adicionarCarro() {
     // Verificar se a vaga já está ocupada
     if (vehicles.some(v => v.vaga === vaga && v.ativo)) {
         alert('Vaga já ocupada! Escolha outra vaga.');
+        return;
+    }
+    
+    if (vaga > 50 || vaga <= 0){
+        alert('Vaga invalida [min:01 e max:50] ')
         return;
     }
 
