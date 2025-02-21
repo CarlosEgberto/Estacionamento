@@ -118,7 +118,7 @@ input {
 .btn-selecionar {
     background: #2196f3;
     color: white;
-    padding: 8px 15px;
+    padding: 10px 15px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -128,7 +128,7 @@ input {
 .btn-editar{
     background: #f76262;
     color: white;
-    padding: 8px 15px;
+    padding: 10px 15px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -287,7 +287,7 @@ nav>a:hover{
         margin-top: 20px;
     }
     .sidebar {
-        width: 280px;
+        width: 250px;
     }
 }
 
@@ -303,8 +303,22 @@ nav>a:hover{
     }
     
 }
+@media (max-width: 950px) {
+    .container {
+        flex-direction: column;
+    }
 
-@media (max-width: 900px) {
+    .sidebar {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .content {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 677px) {
     .veiculos-list {
         display: grid;
         gap: 15px;
@@ -322,5 +336,24 @@ nav>a:hover{
 
     .content {
         padding: 1rem;
+    }
+
+    @media (max-width: 500px){
+        #button-500px{
+            display: grid;
+        gap: 15px;
+        grid-template-columns: repeat(1, 1fr);
+        margin-top: 20px;
+        }
+        .btn-selecionar {
+            width: 8rem;
+            padding: 10px;
+        }
+        
+        .btn-editar{
+            margin-left: 10px;
+            width: 8rem;
+            padding: 10px;
+        }
     }
 }

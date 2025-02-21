@@ -127,10 +127,12 @@ function renderVeiculos() {
                 <div class="vehicle-vaga">Vaga: ${vehicle.vaga}</div>
                 <div class="vehicle-entrada">Entrada: ${vehicle.horaEntrada}</div>
             </div>
+            <div id="button-500px">
             <button class="btn-selecionar" onclick="selecionarVeiculo('${vehicle.id}')">
                 ${selectedVehicle?.id === vehicle.id ? '✓ Selecionado' : 'Selecionar'}
             </button>
             <button class="btn-editar" onclick="editarVaga('${vehicle.id}')">Editar Vaga</button>
+            </div>
         `;
         container.appendChild(card);
     });
