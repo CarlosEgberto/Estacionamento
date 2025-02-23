@@ -4,41 +4,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controle de Vagas</title>
+    <title>Controle de Vagas - Amora Park</title>
     <link rel="stylesheet" href="assets/Css/vagas.css">
+    <link rel="stylesheet" href="assets/Css/darkmode.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
     <div class="container">
+        <!-- Header Fixo -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-parking"></i>
+                <h1>Amora Park</h1>
+            </div>
+            <div class="status">
+                <p><i class="fas fa-clock"></i> <span id="currentTime"></span></p>
+                <p><i class="fas fa-car"></i> Vagas: <span id="vagasLivresHeader">50</span>/50</p>
+            </div>
+        </header>
+
         <aside class="sidebar">
-
             <div class="resumo-vagas">
-                <div class="status-vagas">      
-                    <p>Vagas:</p> 
-                    <p>Ocupadas: 
-                        <span id="vagasOcupadas">0</span>
-                    </p>
-
-                    <p> Livres: 
-                        <span id="vagasLivres">0</span>
-                    </p>
+                <div class="status-vagas">
+                    <h2><i class="fas fa-car"></i> Status das Vagas</h2>
+                    <p>Ocupadas: <span id="vagasOcupadas">0</span></p>
+                    <p>Livres: <span id="vagasLivres">50</span></p>
                 </div>
             </div>
             <nav class="menu">
-                <a href="index.html">Estacionamento</a>
-                <a href="relatorios.html">Relatórios</a>
+                <a href="index.html"><i class="fas fa-car-side"></i> Estacionamento</a>
+                <a href="relatorios.html"><i class="fas fa-file-alt"></i> Relatórios</a>
             </nav>
-
         </aside>
 
         <main class="content">
-            <h1>Controle de Vagas</h1>
-
-            <div class="mapa-vagas" id="mapaVagas">
-            </div>
+            <h1><i class="fas fa-map"></i> Controle de Vagas</h1>
+            <div class="mapa-vagas" id="mapaVagas"></div>
         </main>
-        
+    </div>
 
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle">
+        <input type="checkbox" id="darkModeToggle">
+        <label for="darkModeToggle"><i class="fas fa-moon"></i></label>
     </div>
 
     <script src="assets/Js/vagas.js"></script>

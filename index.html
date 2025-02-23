@@ -6,24 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amora Park - Controle de Estacionamento</title>
     <link rel="stylesheet" href="assets/Css/style.css">
+    <link rel="stylesheet" href="assets/Css/darkmode.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="assets/Js/JsBarcode.js"></script>
 </head>
 
 <body>
     <div class="container">
+        <!-- Header Fixo -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-parking"></i>
+                <h1>Amora Park</h1>
+            </div>
+            <div class="status">
+                <p><i class="fas fa-clock"></i> <span id="currentTime"></span></p>
+                <p><i class="fas fa-car"></i> Vagas: <span id="vagasLivresHeader">50</span>/50</p>
+            </div>
+        </header>
+
         <aside class="sidebar">
-            <h2>ADICIONAR VEÍCULO</h2>
+            <h2><i class="fas fa-car-side"></i> ADICIONAR VEÍCULO</h2>
             <div class="form-container">
                 <div class="form-group">
-                    <label for="modelo">Modelo:</label>
-                    <input type="text" id="modelo" name="modelo" required>
+                    <label for="modelo"><i class="fas fa-car"></i> Modelo:</label>
+                    <input type="text" id="modelo" name="modelo" placeholder="Ex: Onix" required>
                 </div>
                 <div class="form-group">
-                    <label for="placa">Placa:</label>
-                    <input type="text" id="placa" name="placa" pattern="[A-Za-z]{3}-?\d[A-Za-z0-9]{3}" required>
+                    <label for="placa"><i class="fas fa-id-card"></i> Placa:</label>
+                    <input type="text" id="placa" name="placa" pattern="[A-Za-z]{3}-?\d[A-Za-z0-9]{3}" placeholder="AAA-0000" required>
                 </div>
                 <div class="form-group">
-                    <label for="cor">Cor:</label>
+                    <label for="cor"><i class="fas fa-palette"></i> Cor:</label>
                     <select id="cor" class="form-select">
                         <option value="BRANCO">Branco</option>
                         <option value="PRETO">Preto</option>
@@ -33,37 +47,34 @@
                         <option value="AZUL">Azul</option>
                         <option value="VERDE">Verde</option>
                         <option value="OUTRO">Outro</option>
-                   </select>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="vaga">Vaga:</label>
-                    <input type="text" id="vaga" name="vaga" required>
+                    <label for="vaga"><i class="fas fa-map-marker-alt"></i> Vaga:</label>
+                    <input type="text" id="vaga" name="vaga" placeholder="Ex: 01" required>
                 </div>
-                <button class="btn-salvar" onclick="adicionarCarro()">SALVAR</button>
+                <button class="btn-salvar" onclick="adicionarCarro()"><i class="fas fa-save"></i> SALVAR</button>
             </div>
             <nav>
-                <a href="relatorios.html">Relatórios</a>
-                <a href="vagas.html">Controle de Vagas</a>
+                <a href="relatorios.html"><i class="fas fa-file-alt"></i> Relatórios</a>
+                <a href="vagas.html"><i class="fas fa-map"></i> Controle de Vagas</a>
             </nav>
         </aside>
 
         <main class="content">
-            <h1>VEICULOS NO PÁTIO</h1>
-
-            <div class="veiculos-list" id="veiculosList">
-                </div>
+            <h1><i class="fas fa-car"></i> VEÍCULOS NO PÁTIO</h1>
+            <div class="veiculos-list" id="veiculosList"></div>
             <div class="vagas-info">
-                <p id="vagasOcupadas">Vagas ocupadas: 0</p>
-                <p id="vagasLivres">Vagas livres: 50</p>
+                <p><i class="fas fa-car"></i> Vagas ocupadas: <span id="vagasOcupadas">0</span></p>
+                <p><i class="fas fa-parking"></i> Vagas livres: <span id="vagasLivres">50</span></p>
             </div>
             <div class="saida-container">
-                <h2>REGISTRAR SAÍDA</h2>
+                <h2><i class="fas fa-sign-out-alt"></i> REGISTRAR SAÍDA</h2>
                 <div class="selected-vehicle" id="selectedVehicle">
                     Nenhum veículo selecionado
                 </div>
                 <div class="time-info">
-                    <button class="btn-finalizar" onclick="registrarSaida()">FINALIZAR
-                        ESTACIONAMENTO</button>
+                    <button class="btn-finalizar" onclick="registrarSaida()"><i class="fas fa-check"></i> FINALIZAR ESTACIONAMENTO</button>
                     <div id="tempoPermanencia"></div>
                     <div id="valorCobranca"></div>
                 </div>
@@ -71,9 +82,10 @@
         </main>
     </div>
 
+    <!-- Comprovante Modal -->
     <div id="comprovanteContainer" class="comprovante-hidden">
         <div class="comprovante">
-            <h3>COMPROVANTE DE ESTACIONAMENTO</h3>
+            <h3><i class="fas fa-receipt"></i> COMPROVANTE DE ESTACIONAMENTO</h3>
             <svg id="barcode"></svg>
             <div class="info-comprovante">
                 <p>ID: <span id="compId">0000</span></p>
@@ -81,9 +93,15 @@
                 <p>Modelo: <span id="compModelo">Modelo</span></p>
                 <p>Entrada: <span id="compEntrada">00:00</span></p>
             </div>
-            <button onclick="imprimirComprovante()">Imprimir Comprovante</button>
-            <button onclick="fecharComprovante()">Fechar</button>
+            <button onclick="imprimirComprovante()"><i class="fas fa-print"></i> Imprimir Comprovante</button>
+            <button onclick="fecharComprovante()"><i class="fas fa-times"></i> Fechar</button>
         </div>
+    </div>
+
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle">
+        <input type="checkbox" id="darkModeToggle">
+        <label for="darkModeToggle"><i class="fas fa-moon"></i></label>
     </div>
 
     <script src="assets/Js/script.js"></script>

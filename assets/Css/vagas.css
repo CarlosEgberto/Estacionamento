@@ -1,3 +1,4 @@
+/* Estilos gerais */
 * {
     margin: 0;
     padding: 0;
@@ -5,8 +6,15 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Inter', sans-serif;
     background: #f0f2f5;
+    color: #333;
+    transition: background 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background: #1a1a1a;
+    color: #ffffff;
 }
 
 .container {
@@ -14,22 +22,80 @@ body {
     min-height: 100vh;
 }
 
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #2c3e50;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.header .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header .logo i {
+    font-size: 24px;
+}
+
+.header .status {
+    display: flex;
+    gap: 20px;
+}
+
 .sidebar {
     width: 300px;
     background: #2c3e50;
     padding: 20px;
     color: white;
+    margin-top: 60px;
 }
 
 .sidebar h2 {
     margin-bottom: 20px;
     color: #e0e0e0;
-    font: bold 20pt monospace;
+    font: bold 22pt monospace;
+}
+
+.resumo-vagas {
+    margin-bottom: 20px;
+}
+
+.status-vagas {
+    background: #34495e;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.status-vagas h2 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.status-vagas p {
+    margin: 5px 0;
+    font-size: 1.1em;
+}
+
+#vagasOcupadas {
+    color: #e57373;
+}
+
+#vagasLivres {
+    color: #81c784;
 }
 
 nav {
     display: grid;
-    padding-top: 40px;
     gap: 15px;
 }
 
@@ -52,6 +118,7 @@ nav>a:hover {
     flex: 1;
     padding: 30px;
     background: white;
+    margin-top: 60px;
 }
 
 .content>h1 {
@@ -73,57 +140,41 @@ nav>a:hover {
     text-align: center;
     border-radius: 15px;
     font-size: 0.9rem;
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .vaga:hover {
-    transform: translateX(5px);
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-#vagasOcupadas{
-    color: red;
-}
-#vagasLivres{
-    color: rgb(2, 187, 2);
-}
+
 .vaga.ocupada {
     background-color: #ffebee;
     border-color: #e57373;
 }
 
-.resumo-vagas {
-    font-size: 1.1rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    margin: 20px 0;
+.dark-mode-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
 }
 
-.status-vagas {
-    background-color: #c8e6c9;
-    color: #002502;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 30px auto;
-    padding: 35px;
-    text-align: center;
-    font:bold 1.4rem arial;
+.dark-mode-toggle input {
+    display: none;
 }
 
-.vagas-info {
-    margin: 20px 0;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #ddd;
+.dark-mode-toggle label {
+    background: #2c3e50;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
-.vagas-info p {
-    margin: 5px 0;
-    font-weight: bold;
-    color: #333;
+.dark-mode-toggle label:hover {
+    background: #34495e;
 }
 
 /* Media Queries para responsividade */

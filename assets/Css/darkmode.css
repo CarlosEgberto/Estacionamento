@@ -1,0 +1,68 @@
+/* dark-mode.css */
+body.dark-mode {
+    background: #1a1a1a;
+    color: #ffffff;
+}
+
+body.dark-mode .sidebar {
+    background: #34495e;
+    color: #ffffff;
+}
+
+body.dark-mode .content {
+    background: #2c3e50;
+    color: #ffffff;
+}
+
+body.dark-mode .vehicle-card {
+    background: #34495e;
+    border-color: #2c3e50;
+    color: #ffffff;
+}
+
+body.dark-mode .btn-selecionar {
+    background: #1e88e5;
+}
+
+body.dark-mode .btn-editar {
+    background: #e53935;
+}
+
+body.dark-mode .btn-finalizar {
+    background: #c0392b;
+}
+
+body.dark-mode .saida-container {
+    background: #34495e;
+    color: #ffffff;
+}
+
+body.dark-mode .selected-vehicle {
+    background: #2c3e50;
+    color: #ffffff;
+}
+
+body.dark-mode .vagas-info {
+    background: #34495e;
+    border-color: #2c3e50;
+    color: #ffffff;
+}
+body.dark-mode .vagas-info>p {
+    color: #fff;
+}
+
+body.dark-mode .vaga.ocupada{
+    background-color: rgb(204, 107, 107);
+}
+
+body.dark-mode .veiculo-item{
+    color: #1a1a1a;
+}
+
+body.dark-mode .info-comprovante {
+    color: #1a1a1a;
+}
+
+body.dark-mode .comprovante> h3{
+    color: #1a1a1a;
+}

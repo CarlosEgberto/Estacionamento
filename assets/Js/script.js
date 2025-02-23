@@ -1,7 +1,7 @@
 let selectedVehicle = null;
 let vehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
 let idCounter = parseInt(localStorage.getItem('idCounter')) || 1000;
-const totalVagas = 50; // Total de vagas disponíveis no estacionamento
+const totalVagas = 50;
 
 // Função para gerar ID único de 4 dígitos
 function gerarID() {
@@ -16,7 +16,7 @@ function adicionarCarro() {
     const modelo = document.getElementById('modelo').value.toUpperCase();
     const placa = document.getElementById('placa').value.toUpperCase().replace(/-/g, '');
     const cor = document.getElementById('cor').value.toUpperCase();
-    const vaga = document.getElementById('vaga').value.padStart(2,0);
+    const vaga = document.getElementById('vaga').value.padStart(2, 0);
 
     // Validação dos campos
     if (!modelo || !placa || !cor || !vaga) {
@@ -29,9 +29,9 @@ function adicionarCarro() {
         alert('Vaga já ocupada! Escolha outra vaga.');
         return;
     }
-    
-    if (vaga > 50 || vaga <= 0){
-        alert('Vaga invalida [min:01 e max:50] ')
+
+    if (vaga > 50 || vaga <= 0) {
+        alert('Vaga inválida [min:01 e max:50]');
         return;
     }
 
@@ -128,10 +128,10 @@ function renderVeiculos() {
                 <div class="vehicle-entrada">Entrada: ${vehicle.horaEntrada}</div>
             </div>
             <div id="button-500px">
-            <button class="btn-selecionar" onclick="selecionarVeiculo('${vehicle.id}')">
-                ${selectedVehicle?.id === vehicle.id ? '✓ Selecionado' : 'Selecionar'}
-            </button>
-            <button class="btn-editar" onclick="editarVaga('${vehicle.id}')">Editar Vaga</button>
+                <button class="btn-selecionar" onclick="selecionarVeiculo('${vehicle.id}')">
+                    ${selectedVehicle?.id === vehicle.id ? '✓ Selecionado' : 'Selecionar'}
+                </button>
+                <button class="btn-editar" onclick="editarVaga('${vehicle.id}')">Editar Vaga</button>
             </div>
         `;
         container.appendChild(card);
@@ -220,15 +220,29 @@ function calcularValor(horas, minutos) {
 // Atualizar contador de vagas
 function atualizarContadorVagas() {
     const vagasOcupadas = vehicles.filter(v => v.ativo).length;
-    
-    // Verifica se os elementos existem antes de atualizar
-    const vagasOcupadasElement = document.getElementById('vagasOcupadas');
-    const vagasLivresElement = document.getElementById('vagasLivres');
-    
-    if (vagasOcupadasElement && vagasLivresElement) {
-        vagasOcupadasElement.textContent = `Vagas ocupadas: ${vagasOcupadas}`;
-        vagasLivresElement.textContent = `Vagas livres: ${totalVagas - vagasOcupadas}`;
-    }
+    document.getElementById('vagasOcupadas').textContent = `Vagas ocupadas: ${vagasOcupadas}`;
+    document.getElementById('vagasLivres').textContent = `Vagas livres: ${totalVagas - vagasOcupadas}`;
+    document.getElementById('vagasLivresHeader').textContent = totalVagas - vagasOcupadas;
+}
+
+// Dark Mode
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+}
+
+// Verificar Dark Mode ao carregar
+function checkDarkMode() {
+    const darkMode = localStorage.getItem('darkMode') === 'true';
+    document.body.classList.toggle('dark-mode', darkMode);
+    document.getElementById('darkModeToggle').checked = darkMode;
+}
+
+// Atualizar horário atual
+function updateTime() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    document.getElementById('currentTime').textContent = timeString;
 }
 
 // Inicialização
@@ -237,4 +251,10 @@ window.onload = () => {
     if (!localStorage.getItem('idCounter')) {
         localStorage.setItem('idCounter', '1000');
     }
+    checkDarkMode();
+    setInterval(updateTime, 1000);
+    updateTime();
 };
+
+// Evento para o toggle do Dark Mode
+document.getElementById('darkModeToggle').addEventListener('change', toggleDarkMode);

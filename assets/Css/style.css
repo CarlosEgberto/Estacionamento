@@ -6,8 +6,14 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Inter', sans-serif;
     background: #f0f2f5;
+    transition: background 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background: #1a1a1a;
+    color: #ffffff;
 }
 
 .container {
@@ -15,17 +21,45 @@ body {
     min-height: 100vh;
 }
 
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #2c3e50;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.header .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header .logo i {
+    font-size: 28px;
+}
+
+.header .status {
+    display: flex;
+    gap: 20px;
+}
+
 .sidebar {
     width: 300px;
     background: #2c3e50;
     padding: 20px;
     color: white;
-    
+    margin-top: 60px;
 }
 
-
 .sidebar h2 {
-    margin-bottom: 22px;
+    margin-bottom: 18px;
     color: #e0e0e0;
     font: bold 22pt monospace;
     text-align: center;
@@ -35,7 +69,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    font: bold 18pt monospace;
+    font: bold 17pt monospace;
 }
 
 .form-group {
@@ -55,6 +89,12 @@ input {
     border-radius: 4px;
     background: #34495e;
     color: white;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #2980b9;
+    outline: none;
 }
 
 .btn-salvar {
@@ -75,8 +115,10 @@ input {
     flex: 1;
     padding: 30px;
     background: white;
+    margin-top: 60px;
 }
-.content>h1{
+
+.content>h1 {
     text-align: center;
 }
 
@@ -95,11 +137,12 @@ input {
     background: #f8f9fa;
     border-radius: 8px;
     border: 1px solid #e9ecef;
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .vehicle-card:hover {
     transform: translateX(5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .vehicle-card.selected {
@@ -123,15 +166,25 @@ input {
     border-radius: 4px;
     cursor: pointer;
     margin: 10px;
+    transition: background 0.3s;
 }
 
-.btn-editar{
+.btn-selecionar:hover {
+    background: #1e88e5;
+}
+
+.btn-editar {
     background: #f76262;
     color: white;
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-editar:hover {
+    background: #e53935;
 }
 
 .saida-container {
@@ -139,7 +192,7 @@ input {
     padding: 20px;
     background: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .selected-vehicle {
@@ -157,6 +210,11 @@ input {
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-finalizar:hover {
+    background: #c0392b;
 }
 
 .time-info {
@@ -164,7 +222,7 @@ input {
     font-size: 0.9em;
     color: #666;
 }
-/* Adicione ao CSS */
+
 .comprovante-hidden {
     display: none;
     position: fixed;
@@ -172,7 +230,7 @@ input {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1000;
 }
 
@@ -202,11 +260,12 @@ input {
     margin: 15px 0;
 }
 
-nav{
+nav {
     display: grid;
-    padding-top: 40px;
+    padding-top: 20px;
 }
-nav>a{
+
+nav>a {
     text-decoration: none;
     background-color: rgb(21, 21, 87);
     color: #fff;
@@ -214,11 +273,14 @@ nav>a{
     margin-top: 30px;
     border-radius: 15px;
     text-align: center;
+    transition: opacity 0.3s;
 }
-nav>a:hover{
+
+nav>a:hover {
     opacity: 0.7;
     background-color: rgb(69, 69, 192);
 }
+
 .vagas-info {
     margin: 20px 0;
     padding: 15px;
@@ -232,6 +294,7 @@ nav>a:hover{
     font-weight: bold;
     color: #333;
 }
+
 .form-select {
     padding: 8px;
     border: 1px solid #34495e;
@@ -252,16 +315,42 @@ nav>a:hover{
     box-shadow: 0 0 5px rgba(41, 128, 185, 0.5);
 }
 
+.dark-mode-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.dark-mode-toggle input {
+    display: none;
+}
+
+.dark-mode-toggle label {
+    background: #2c3e50;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.dark-mode-toggle label:hover {
+    background: #34495e;
+}
+
+
+
 @media print {
     body * {
         visibility: hidden;
     }
-    
+
     .comprovante,
     .comprovante * {
         visibility: visible;
     }
-    
+
     .comprovante {
         position: absolute;
         left: 0;
@@ -269,22 +358,20 @@ nav>a:hover{
         width: 100%;
         box-shadow: none;
     }
-    
+
     button {
         display: none !important;
     }
-    
+
     #barcode {
         transform: scale(1.2);
         margin: 20px auto;
     }
 }
+
 @media (max-width: 1600px) {
     .veiculos-list {
-        display: grid;
-        gap: 15px;
         grid-template-columns: repeat(3, 1fr);
-        margin-top: 20px;
     }
     .sidebar {
         width: 250px;
@@ -293,16 +380,13 @@ nav>a:hover{
 
 @media (max-width: 1200px) {
     .veiculos-list {
-        display: grid;
-        gap: 15px;
         grid-template-columns: repeat(2, 1fr);
-        margin-top: 20px;
     }
     .sidebar {
         width: 250px;
     }
-    
 }
+
 @media (max-width: 950px) {
     .container {
         flex-direction: column;
@@ -320,10 +404,7 @@ nav>a:hover{
 
 @media (max-width: 677px) {
     .veiculos-list {
-        display: grid;
-        gap: 15px;
         grid-template-columns: repeat(1, 1fr);
-        margin-top: 20px;
     }
     .container {
         flex-direction: column;
@@ -336,24 +417,5 @@ nav>a:hover{
 
     .content {
         padding: 1rem;
-    }
-
-    @media (max-width: 500px){
-        #button-500px{
-            display: grid;
-        gap: 15px;
-        grid-template-columns: repeat(1, 1fr);
-        margin-top: 20px;
-        }
-        .btn-selecionar {
-            width: 8rem;
-            padding: 10px;
-        }
-        
-        .btn-editar{
-            margin-left: 10px;
-            width: 8rem;
-            padding: 10px;
-        }
     }
 }

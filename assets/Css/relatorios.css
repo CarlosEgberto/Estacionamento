@@ -6,25 +6,15 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Inter', sans-serif;
     background: #f0f2f5;
     color: #333;
+    transition: background 0.3s, color 0.3s;
 }
 
-#listaVeiculos {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* Cria 5 colunas de tamanho igual */
-    gap: 15px; /* Espaçamento entre os itens */
-    padding: 20px; /* Espaçamento interno do container */
-}
-
-.veiculo-item {
-    text-align: center;
-    background-color: rgb(235, 235, 235);
-    box-shadow: 1px 2px 4px rgba(22, 0, 0, 0.288);
-    border-radius: 10px;
-    padding: 20px; /* 
-    Espaçamento interno do item */
+body.dark-mode {
+    background: #1a1a1a;
+    color: #ffffff;
 }
 
 .container {
@@ -32,22 +22,69 @@ body {
     min-height: 100vh;
 }
 
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #2c3e50;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.header .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header .logo i {
+    font-size: 24px;
+}
+
+.header .status {
+    display: flex;
+    gap: 20px;
+}
+
 .sidebar {
     width: 300px;
     background: #2c3e50;
     padding: 20px;
     color: white;
+    margin-top: 60px;
 }
 
 .sidebar h2 {
     margin-bottom: 20px;
-    color: #052700;
-    font: bold 20pt monospace;
+    color: #e0e0e0;
+    font: bold 22pt monospace;
+}
+
+.total-arrecadado {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #34495e;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.total-arrecadado h2 {
+    margin-bottom: 10px;
+}
+
+#totalMes {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #27ae60;
 }
 
 nav {
     display: grid;
-    padding-top: 40px;
     gap: 15px;
 }
 
@@ -66,10 +103,27 @@ nav>a:hover {
     background-color: rgb(69, 69, 192);
 }
 
+#botaoApagarRegistro {
+    background: #d65353;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#botaoApagarRegistro:hover {
+    background: #b84545;
+}
+
 .content {
     flex: 1;
     padding: 30px;
     background: white;
+    margin-top: 60px;
 }
 
 .content>h1 {
@@ -78,23 +132,10 @@ nav>a:hover {
     font-size: 30pt;
 }
 
-/* Estilos para total arrecadado */
-.total-arrecadado {
-    margin: 70px auto 0px;
-    padding: 20px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    text-align: center;
+.lista-veiculos {
+    margin-top: 20px;
 }
 
-#totalMes {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #27ae60;
-}
-
-/* Estilos para lista de veículos */
 #pesquisaPlaca {
     display: block;
     margin: 10px auto;
@@ -106,40 +147,55 @@ nav>a:hover {
     font-size: 1em;
 }
 
-#botaoApagarRegistro {
-    background: #d65353;
-    color: white;
-    display: block;
-    margin: 30px auto;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background 0.3s;
-    font-size: 1em;
+#listaVeiculos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    padding: 20px;
 }
 
-#botaoApagarRegistro:hover {
-    background: #b84545;
+.veiculo-item {
+    text-align: center;
+    background-color: #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.veiculo-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.dark-mode-toggle input {
+    display: none;
+}
+
+.dark-mode-toggle label {
+    background: #2c3e50;
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.dark-mode-toggle label:hover {
+    background: #34495e;
 }
 
 /* Media Queries para responsividade */
 @media (max-width: 1200px) {
-    .sidebar {
-        width: 250px;
-    }
     #listaVeiculos {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr); /* Cria 3 colunas de tamanho igual */
-        gap: 15px; /* Espaçamento entre os itens */
-        padding: 20px; /* Espaçamento interno do container */
-    }
-    
-    .veiculo-item {
-        text-align: center;
-        box-shadow: 1px 2px 4px rgba(22, 0, 0, 0.288);
-        border-radius: 10px;
-        padding: 20px; /* Espaçamento interno do item */
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
@@ -162,17 +218,7 @@ nav>a:hover {
     }
 
     #listaVeiculos {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); /* Cria 3 colunas de tamanho igual */
-        gap: 15px; /* Espaçamento entre os itens */
-        padding: 20px; /* Espaçamento interno do container */
-    }
-    
-    .veiculo-item {
-        text-align: center;
-        box-shadow: 1px 2px 4px rgba(22, 0, 0, 0.288);
-        border-radius: 10px;
-        padding: 20px; /* Espaçamento interno do item */
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -183,16 +229,6 @@ nav>a:hover {
     }
 
     #listaVeiculos {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Cria 3 colunas de tamanho igual */
-        gap: 15px; /* Espaçamento entre os itens */
-        padding: 20px; /* Espaçamento interno do container */
-    }
-    
-    .veiculo-item {
-        text-align: center;
-        box-shadow: 1px 2px 4px rgba(22, 0, 0, 0.288);
-        border-radius: 10px;
-        padding: 20px; /* Espaçamento interno do item */
+        grid-template-columns: repeat(1, 1fr);
     }
 }

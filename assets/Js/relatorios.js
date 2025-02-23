@@ -1,12 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     calcularTotalArrecadado();
     carregarListaVeiculos();
+    updateTime();
 
     const pesquisaPlaca = document.getElementById('pesquisaPlaca');
     pesquisaPlaca.addEventListener('input', filtrarListaVeiculos);
 
     const botaoApagarRegistro = document.getElementById('botaoApagarRegistro');
     botaoApagarRegistro.addEventListener('click', apagarTudo);
+
+    // Dark Mode
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    darkModeToggle.addEventListener('change', toggleDarkMode);
+    checkDarkMode();
 });
 
 function calcularTotalArrecadado() {
@@ -73,16 +79,25 @@ function apagarTudo() {
     localStorage.removeItem('vehicles');
     localStorage.removeItem('idCounter');
     carregarListaVeiculos();
+    calcularTotalArrecadado();
 }
 
-function excluirRegistro(placa, entrada) {
-    const vehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
-    const veiculo = vehicles.find(v => v.placa === placa);
+// Dark Mode
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+}
 
-    if (veiculo && veiculo.historico) {
-        veiculo.historico = veiculo.historico.filter(r => r.entrada !== entrada);
-        localStorage.setItem('vehicles', JSON.stringify(vehicles));
-        calcularTotalArrecadado();
-        carregarListaVeiculos();
-    }
+function checkDarkMode() {
+    const darkMode = localStorage.getItem('darkMode') === 'true';
+    document.body.classList.toggle('dark-mode', darkMode);
+    document.getElementById('darkModeToggle').checked = darkMode;
+}
+
+// Atualizar horário atual
+function updateTime() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    document.getElementById('currentTime').textContent = timeString;
+    setTimeout(updateTime, 1000);
 }

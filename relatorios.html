@@ -4,34 +4,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatórios</title>
+    <title>Relatórios - Amora Park</title>
     <link rel="stylesheet" href="assets/Css/relatorios.css">
+    <link rel="stylesheet" href="assets/Css/darkmode.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
     <div class="container">
+        <!-- Header Fixo -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-parking"></i>
+                <h1>Amora Park</h1>
+            </div>
+            <div class="status">
+                <p><i class="fas fa-clock"></i> <span id="currentTime"></span></p>
+                <p><i class="fas fa-car"></i> Vagas: <span id="vagasLivresHeader">50</span>/50</p>
+            </div>
+        </header>
+
         <aside class="sidebar">
             <section class="total-arrecadado">
-                <h2>Total Arrecadado</h2>
-                <div id="totalMes"></div>
+                <h2><i class="fas fa-coins"></i> Total Arrecadado</h2>
+                <div id="totalMes">R$ 0.00</div>
             </section>
-            
+
             <nav class="menu">
-                <a href="index.html">Estacionamento</a>
-                <a href="vagas.html">Controle de Vagas</a>
+                <a href="index.html"><i class="fas fa-car-side"></i> Estacionamento</a>
+                <a href="vagas.html"><i class="fas fa-map"></i> Controle de Vagas</a>
             </nav>
-            <button id="botaoApagarRegistro"> Apagar Registros</button>
+            <button id="botaoApagarRegistro"><i class="fas fa-trash"></i> Apagar Registros</button>
         </aside>
 
         <main class="content">
-            <h1>Relatórios Mensais</h1>
+            <h1><i class="fas fa-file-alt"></i> Relatórios Mensais</h1>
 
             <section class="lista-veiculos">
-                <h2>Lista de Veículos</h2>
+                <h2><i class="fas fa-list"></i> Lista de Veículos</h2>
                 <input type="text" id="pesquisaPlaca" placeholder="Digite a placa">
                 <div id="listaVeiculos"></div>
             </section>
         </main>
+    </div>
+
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle">
+        <input type="checkbox" id="darkModeToggle">
+        <label for="darkModeToggle"><i class="fas fa-moon"></i></label>
     </div>
 
     <script src="assets/Js/relatorios.js"></script>
