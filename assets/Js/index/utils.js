@@ -15,8 +15,8 @@ function calcularTempo(entradaTimestamp) {
 }
 
 function calcularValor(horas, minutos) {
-    const taxaMinima = 15.00;
-    const valorHora = 10.00;
+    const taxaMinima = 5.00;
+    const valorHora = 5.00;
     if (horas === 0 && minutos < 15) return taxaMinima;
     return Math.max(taxaMinima, (horas * valorHora) + (minutos > 0 ? valorHora : 0));
 }
