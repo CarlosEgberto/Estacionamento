@@ -43,7 +43,7 @@ body.dark-mode {
 }
 
 .header .logo i {
-    font-size: 24px;
+    font-size: 28px;
 }
 
 .header .status {
@@ -56,7 +56,7 @@ body.dark-mode {
     background: #2c3e50;
     padding: 20px;
     color: white;
-    margin-top: 60px;
+    margin-top: 50px;
 }
 
 .sidebar h2 {
@@ -207,10 +207,12 @@ nav>a:hover {
     .sidebar {
         width: 100%;
         padding: 10px;
+        margin-bottom: 0px;
     }
 
     .content {
-        padding: 1rem;
+        padding: 3rem 1rem 1rem 1rem;
+        margin-top: 0px;
     }
 
     #pesquisaPlaca {
