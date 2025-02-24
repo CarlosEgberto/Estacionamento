@@ -1,2 +1,2 @@
-- vagas em grid para caber mais em menos espaço.
-- padronizaçao de layout para ter uma sidebar em todos as paginas.
+- mensalistas com valor fixo, bloqueio de vagas de mensalistas  conta de que data ira acabar 30 dias 
+- supabase
