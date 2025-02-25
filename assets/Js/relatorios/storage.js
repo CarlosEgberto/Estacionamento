@@ -1,5 +1,3 @@
-//Manipulação do localStorage.
-// assets/Js/relatorios/storage.js
 function loadVehicles() {
     return JSON.parse(localStorage.getItem('vehicles')) || [];
 }

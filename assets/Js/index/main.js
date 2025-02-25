@@ -1,5 +1,4 @@
-// main.js
-import { adicionarCarro, selecionarVeiculo, editarVaga, registrarSaida, vehicles } from './vehicleManager.js';
+import { adicionarCarro, selecionarVeiculo, editarVaga, registrarSaida, verificarMensalistas, vehicles } from './vehicleManager.js';
 import { renderVeiculos, mostrarComprovante, fecharComprovante, updateSelectedVehicleUI } from './uiRenderer.js';
 import { limparFormulario, updateTime } from './utils.js';
 import { saveIdCounter, loadIdCounter } from './storage.js';
@@ -24,13 +23,18 @@ function init() {
     setInterval(updateTime, 1000);
     updateTime();
 
-    // Expor funções globalmente para os onclick do HTML
+    verificarMensalistas();
+    setInterval(verificarMensalistas, 60000); // Verifica a cada 1 minuto
+
     window.adicionarCarro = () => {
         const modelo = document.getElementById('modelo').value;
         const placa = document.getElementById('placa').value;
         const cor = document.getElementById('cor').value;
         const vaga = document.getElementById('vaga').value;
-        const veiculo = adicionarCarro(modelo, placa, cor, vaga);
+        const isMensalista = document.getElementById('isMensalista').checked;
+        const precoMensal = isMensalista ? document.getElementById('precoMensal').value : 0;
+
+        const veiculo = adicionarCarro(modelo, placa, cor, vaga, isMensalista, precoMensal);
         if (veiculo) {
             limparFormulario();
             renderVeiculos();
@@ -60,7 +64,6 @@ function init() {
     window.fecharComprovante = fecharComprovante;
     window.imprimirComprovante = window.print;
 
-    // Evento do Dark Mode
     document.getElementById('darkModeToggle').addEventListener('change', toggleDarkMode);
 }
 

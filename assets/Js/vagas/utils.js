@@ -1,5 +1,3 @@
-//Funções utilitárias (tempo, dark mode).
-// assets/Js/vagas/utils.js
 function updateTime() {
     const now = new Date();
     const timeString = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });

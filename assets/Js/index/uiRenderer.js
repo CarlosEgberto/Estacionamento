@@ -1,5 +1,3 @@
-//Renderização da interface (listas, comprovantes, etc.)
-// uiRenderer.js
 import { vehicles, selectedVehicle, totalVagas } from './vehicleManager.js';
 
 function renderVeiculos() {
@@ -54,8 +52,8 @@ function fecharComprovante() {
 
 function atualizarContadorVagas() {
     const vagasOcupadas = vehicles.filter(v => v.ativo).length;
-    document.getElementById('vagasOcupadas').textContent = `Vagas ocupadas: ${vagasOcupadas}`;
-    document.getElementById('vagasLivres').textContent = `Vagas livres: ${totalVagas - vagasOcupadas}`;
+    document.getElementById('vagasOcupadas').textContent = vagasOcupadas;
+    document.getElementById('vagasLivres').textContent = totalVagas - vagasOcupadas;
     document.getElementById('vagasLivresHeader').textContent = totalVagas - vagasOcupadas;
 }
 

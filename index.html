@@ -11,7 +11,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header Fixo -->
         <header class="header">
             <div class="logo">
                 <i class="fas fa-parking"></i>
@@ -51,6 +50,13 @@
                     <label for="vaga"><i class="fas fa-map-marker-alt"></i> Vaga:</label>
                     <input type="text" id="vaga" name="vaga" placeholder="Ex: 01" required>
                 </div>
+                <div class="form-group">
+                    <label><input type="checkbox" id="isMensalista"> Mensalista</label>
+                </div>
+                <div class="form-group" id="precoMensalContainer" style="display: none;">
+                    <label for="precoMensal"><i class="fas fa-coins"></i> Preço Mensal (R$):</label>
+                    <input type="number" id="precoMensal" name="precoMensal" step="0.01" placeholder="Ex: 150.00">
+                </div>
                 <button class="btn-salvar" onclick="adicionarCarro()"><i class="fas fa-save"></i> SALVAR</button>
             </div>
             <nav>
@@ -80,7 +86,6 @@
         </main>
     </div>
 
-    <!-- Comprovante Modal -->
     <div id="comprovanteContainer" class="comprovante-hidden">
         <div class="comprovante">
             <h3><i class="fas fa-receipt"></i> COMPROVANTE DE ESTACIONAMENTO</h3>
@@ -89,19 +94,23 @@
                 <p>ID: <span id="compId">0000</span></p>
                 <p>Placa: <span id="compPlaca">ABC-0000</span></p>
                 <p>Modelo: <span id="compModelo">Modelo</span></p>
-                <p>Entrada: <span id="compEntrada">00:00</span></p>
+                <p>Entrada: <span id="compEntrada">00/00/0000 00:00</span></p>
             </div>
             <button onclick="imprimirComprovante()"><i class="fas fa-print"></i> Imprimir Comprovante</button>
             <button onclick="fecharComprovante()"><i class="fas fa-times"></i> Fechar</button>
         </div>
     </div>
 
-    <!-- Dark Mode Toggle -->
     <div class="dark-mode-toggle">
         <input type="checkbox" id="darkModeToggle">
         <label for="darkModeToggle"><i class="fas fa-moon"></i></label>
     </div>
 
+    <script>
+        document.getElementById('isMensalista').addEventListener('change', function() {
+            document.getElementById('precoMensalContainer').style.display = this.checked ? 'block' : 'none';
+        });
+    </script>
     <script type="module" src="assets/Js/index/main.js"></script>
 </body>
 </html>

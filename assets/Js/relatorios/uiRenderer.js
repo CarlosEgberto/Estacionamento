@@ -1,5 +1,3 @@
-//Renderização da interface e filtros.
-// assets/Js/relatorios/uiRenderer.js
 import { loadVehicles } from './storage.js';
 import { ultimaEntrada } from './utils.js';
 
@@ -17,6 +15,7 @@ function renderListaVeiculos() {
             <p>Placa: ${vehicle.placa}</p>
             <p>Cor: ${vehicle.cor}</p>
             <p>Última entrada: ${ultimaEntrada(vehicle)}</p>
+            <p>Tipo: ${vehicle.isMensalista ? `Mensalista (R$ ${vehicle.precoMensal.toFixed(2)})` : 'Avulso'}</p>
         `;
         listaVeiculos.appendChild(veiculoDiv);
     });

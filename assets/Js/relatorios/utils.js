@@ -1,5 +1,3 @@
-//Funções utilitárias (como cálculo de total, tempo, dark mode).
-// assets/Js/relatorios/utils.js
 import { loadVehicles } from './storage.js';
 
 function calcularTotalArrecadado() {

@@ -1,16 +1,17 @@
-//Renderização do mapa de vagas e resumo.
-// assets/Js/vagas/uiRenderer.js
 import { loadVehicles } from './storage.js';
 
 function atualizarMapaVagas() {
     const vehicles = loadVehicles();
-    const vagasOcupadas = vehicles.filter(v => v.ativo).map(v => v.vaga);
+    const vagasOcupadas = vehicles.filter(v => v.ativo).map(v => ({ vaga: v.vaga, isMensalista: v.isMensalista }));
     const totalVagas = 50;
 
     const mapa = Array.from({ length: totalVagas }, (_, i) => {
         const vagaNum = (i + 1).toString().padStart(2, '0');
-        const ocupada = vagasOcupadas.includes(vagaNum);
-        return `<div class="vaga ${ocupada ? 'ocupada' : 'livre'}">${vagaNum}</div>`;
+        const vagaInfo = vagasOcupadas.find(v => v.vaga === vagaNum);
+        const ocupada = vagaInfo !== undefined;
+        const texto = ocupada && vagaInfo.isMensalista ? 'Mensalista' : vagaNum;
+
+        return `<div class="vaga ${ocupada ? 'ocupada' : 'livre'}">${texto}</div>`;
     }).join('');
 
     document.getElementById('mapaVagas').innerHTML = mapa;

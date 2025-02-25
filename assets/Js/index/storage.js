@@ -1,7 +1,5 @@
-//Manipulação do localStorage.
-// storage.js
 function loadVehicles() {
-    return JSON.parse(localStorage.getItem('vehicles'));
+    return JSON.parse(localStorage.getItem('vehicles')) || [];
 }
 
 function saveVehicles(vehicles) {
@@ -9,7 +7,7 @@ function saveVehicles(vehicles) {
 }
 
 function loadIdCounter() {
-    return parseInt(localStorage.getItem('idCounter'));
+    return parseInt(localStorage.getItem('idCounter')) || null;
 }
 
 function saveIdCounter(idCounter) {
