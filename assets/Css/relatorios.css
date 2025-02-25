@@ -111,8 +111,9 @@ nav>a:hover {
     border-radius: 10px;
     cursor: pointer;
     transition: background 0.3s;
-    width: 100%;
-    margin-top: 20px;
+    width: 30vh;
+    display: block;
+    margin:30px auto;
 }
 
 #botaoApagarRegistro:hover {
@@ -222,6 +223,7 @@ nav>a:hover {
     #listaVeiculos {
         grid-template-columns: repeat(2, 1fr);
     }
+
 }
 
 @media (max-width: 768px) {

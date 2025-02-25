@@ -66,3 +66,29 @@ body.dark-mode .info-comprovante {
 body.dark-mode .comprovante> h3{
     color: #1a1a1a;
 }
+input {
+    padding: 8px;
+    border: 1px solid #34495e;
+    border-radius: 4px;
+    background: #34495e;
+    color: white;
+    transition: border-color 0.3s;
+}
+
+input {
+    padding: 8px;
+    border: 1px solid #34495e;
+    border-radius: 4px;
+    background: #34495e;
+    color: white;
+    transition: border-color 0.3s;
+}
+
+input {
+    padding: 8px;
+    border: 1px solid #34495e;
+    border-radius: 4px;
+    background: #a3acb6;
+    color: white;
+    transition: border-color 0.3s;
+}
