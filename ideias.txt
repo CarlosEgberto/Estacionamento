@@ -1,2 +1,0 @@
-- mensalistas com valor fixo, bloqueio de vagas de mensalistas  conta de que data ira acabar 30 dias 
-- supabase

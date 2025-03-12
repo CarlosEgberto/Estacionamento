@@ -1,26 +1,32 @@
-import { loadVehicles } from './storage.js';
+import { loadVehicles } from '../index/storageIndex.js';
 
-function calcularTotalArrecadado() {
-    const vehicles = loadVehicles();
+async function calcularTotalArrecadado() {
+    console.log('Calculando total arrecadado...');
+    const vehicles = await loadVehicles();
     let total = 0;
 
-    vehicles.forEach(vehicle => {
-        if (vehicle.historico && vehicle.historico.length > 0) {
-            vehicle.historico.forEach(registro => {
-                if (registro.valor) {
-                    total += registro.valor;
-                }
-            });
-        }
-    });
+    if (vehicles.length === 0) {
+        console.log('Nenhum veículo para calcular total');
+    } else {
+        vehicles.forEach(vehicle => {
+            if (vehicle.historico && vehicle.historico.length > 0) {
+                vehicle.historico.forEach(registro => {
+                    if (registro.valor) {
+                        total += registro.valor;
+                    }
+                });
+            }
+        });
+    }
 
     document.getElementById('totalMes').textContent = `R$ ${total.toFixed(2)}`;
+    console.log('Total arrecadado calculado:', total.toFixed(2));
 }
 
 function ultimaEntrada(vehicle) {
     if (vehicle.historico && vehicle.historico.length > 0) {
         const ultimoRegistro = vehicle.historico[vehicle.historico.length - 1];
-        return ultimoRegistro.entrada;
+        return ultimoRegistro.entrada || '-';
     }
     return '-';
 }

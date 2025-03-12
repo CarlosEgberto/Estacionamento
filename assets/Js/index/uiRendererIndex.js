@@ -1,4 +1,4 @@
-import { vehicles, selectedVehicle, totalVagas } from './vehicleManager.js';
+import { vehicles, selectedVehicle, totalVagas } from './vehicleManagerIndex.js';
 
 function renderVeiculos() {
     const container = document.getElementById('veiculosList');
@@ -13,7 +13,7 @@ function renderVeiculos() {
                 <div class="vehicle-modelo">${vehicle.modelo}</div>
                 <div class="vehicle-placa">${vehicle.placa}</div>
                 <div class="vehicle-vaga">Vaga: ${vehicle.vaga}</div>
-                <div class="vehicle-entrada">Entrada: ${vehicle.horaEntrada}</div>
+                <div class="vehicle-entrada">Entrada: ${vehicle.hora_entrada}</div>
             </div>
             <div id="button-500px">
                 <button class="btn-selecionar" onclick="selecionarVeiculo('${vehicle.id}')">
@@ -32,7 +32,7 @@ function mostrarComprovante(veiculo) {
     document.getElementById('compId').textContent = veiculo.id;
     document.getElementById('compPlaca').textContent = veiculo.placa;
     document.getElementById('compModelo').textContent = veiculo.modelo;
-    document.getElementById('compEntrada').textContent = veiculo.horaEntrada;
+    document.getElementById('compEntrada').textContent = veiculo.hora_entrada;
 
     JsBarcode("#barcode", veiculo.id, {
         format: "CODE128",

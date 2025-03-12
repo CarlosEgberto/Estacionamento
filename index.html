@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%23000000' d='M135.2 117.4L109.1 192H402.9l-26.1-74.6C372.3 104.6 360.2 96 346.6 96H165.4c-13.6 0-25.7 8.6-30.2 21.4zM39.6 196.8L74.8 96.3C88.3 57.8 124.6 32 165.4 32H346.6c40.8 0 77.1 25.8 90.6 64.3l35.2 100.5c23.2 9.6 39.6 32.5 39.6 59.2V400v48c0 17.7-14.3 32-32 32H448c-17.7 0-32-14.3-32-32V400H96v48c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V400 256c0-26.7 16.4-49.6 39.6-59.2zM128 288a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm288 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z'/></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%23000000' d='M135.2 117.4L109.1 192H402.9l-26.1-74.6C372.3 104.6 360.2 96 346.6 96H165.4c-13.6 0-25.7 8.6-30.2 21.4zM39.6 196.8L74.8 96.3C88.3 57.8 124.6 32 165.4 32H346.6c40.8 0 77.1 25.8 90.6 64.3l35.2 100.5c23.2 9.6 39.6 32.5 39.6 59.2V400v48c0 17.7-14.3 32-32 32H448c-17.7 0-32-14.3-32-32V400H96v48c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V400 256c0-26.7 16.4-49.6 39.6-59.2zM128 288a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm288 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64z'/></svg>">
     <title>Amora Park - Controle de Estacionamento</title>
     <link rel="stylesheet" href="assets/Css/style.css">
     <link rel="stylesheet" href="assets/Css/darkmode.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="assets/Js/JsBarcode.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <div class="container">
@@ -58,7 +59,7 @@
                     <label for="precoMensal"><i class="fas fa-coins"></i> Preço Mensal (R$):</label>
                     <input type="number" id="precoMensal" name="precoMensal" step="0.01" placeholder="Ex: 150.00">
                 </div>
-                <button class="btn-salvar" onclick="adicionarCarro()"><i class="fas fa-save"></i> SALVAR</button>
+                <button class="btn-salvar" id="btnAdicionarCarro"><i class="fas fa-save"></i> SALVAR</button>
             </div>
             <nav>
                 <a href="relatorios.html"><i class="fas fa-file-alt"></i> Relatórios</a>
@@ -79,7 +80,7 @@
                     Nenhum veículo selecionado
                 </div>
                 <div class="time-info">
-                    <button class="btn-finalizar" onclick="registrarSaida()"><i class="fas fa-check"></i> FINALIZAR ESTACIONAMENTO</button>
+                    <button class="btn-finalizar" id="btnRegistrarSaida"><i class="fas fa-check"></i> FINALIZAR ESTACIONAMENTO</button>
                     <div id="tempoPermanencia"></div>
                     <div id="valorCobranca"></div>
                 </div>
@@ -97,8 +98,8 @@
                 <p>Modelo: <span id="compModelo">Modelo</span></p>
                 <p>Entrada: <span id="compEntrada">00/00/0000 00:00</span></p>
             </div>
-            <button onclick="imprimirComprovante()"><i class="fas fa-print"></i> Imprimir Comprovante</button>
-            <button onclick="fecharComprovante()"><i class="fas fa-times"></i> Fechar</button>
+            <button id="btnImprimirComprovante"><i class="fas fa-print"></i> Imprimir Comprovante</button>
+            <button id="btnFecharComprovante"><i class="fas fa-times"></i> Fechar</button>
         </div>
     </div>
 
@@ -112,6 +113,6 @@
             document.getElementById('precoMensalContainer').style.display = this.checked ? 'block' : 'none';
         });
     </script>
-    <script type="module" src="assets/Js/index/main.js"></script>
+    <script type="module" src="assets/Js/index/Index.js"></script>
 </body>
 </html>

@@ -1,0 +1,71 @@
+storageIndex para salvar :
+// Usar o Supabase do escopo global (carregado via CDN)
+const SUPABASE_URL = 'https://kvaixwdzqisovwjuphub.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2YWl4d2R6cWlzb3Z3anVwaHViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA0MTAyMzcsImV4cCI6MjA1NTk4NjIzN30.aBDsCcBWnPKt6JBE9MTj86eu9zbmD-SO378lORJ1Fk0';
+
+// Função para inicializar o cliente Supabase
+function getSupabaseClient() {
+    if (!window.supabase) { // Corrigido para 'supabase' minúsculo
+        throw new Error('Supabase não foi carregado. Verifique o script CDN.');
+    }
+    return window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+}
+
+async function loadVehicles() {
+    const supabase = getSupabaseClient();
+    const { data, error } = await supabase
+        .from('vehicles')
+        .select('*')
+        .order('id', { ascending: true });
+
+    if (error) {
+        console.error('Erro ao carregar veículos:', error);
+        return [];
+    }
+    return data || [];
+}
+
+async function saveVehicles(vehicles) {
+    const supabase = getSupabaseClient();
+    const { error } = await supabase
+        .from('vehicles')
+        .upsert(vehicles, { onConflict: 'id' });
+
+    if (error) {
+        console.error('Erro ao salvar veículos:', error);
+        return false;
+    }
+    return true;
+}
+
+async function loadIdCounter() {
+    const supabase = getSupabaseClient();
+    const { data, error } = await supabase
+        .from('id_counter')
+        .select('counter')
+        .single();
+
+    if (error) {
+        console.error('Erro ao carregar contador de ID:', error);
+        return 1000; // Valor padrão
+    }
+    return data.counter || 1000;
+}
+
+async function saveIdCounter(idCounter) {
+    const supabase = getSupabaseClient();
+    const { error } = await supabase
+        .from('id_counter')
+        .update({ counter: idCounter })
+        .eq('counter', await loadIdCounter());
+
+    if (error) {
+        console.error('Erro ao salvar contador de ID:', error);
+        return false;
+    }
+    return true;
+}
+
+export { loadVehicles, saveVehicles, loadIdCounter, saveIdCounter };
+
+

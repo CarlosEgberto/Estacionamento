@@ -1,20 +1,25 @@
-import { saveVehicles, loadVehicles, saveIdCounter, loadIdCounter } from './storage.js';
-import { formatarPlaca, calcularTempo, calcularValor } from './utils.js';
+import { saveVehicles, loadVehicles, saveIdCounter, loadIdCounter } from '../index/storageIndex.js';
+import { formatarPlaca, calcularTempo, calcularValor } from './utilsIndex.js';
 
 let selectedVehicle = null;
-let vehicles = loadVehicles() || [];
-let idCounter = loadIdCounter() || 1000;
+let vehicles = [];
+let idCounter = 1000;
 const totalVagas = 50;
-const UM_MES = 1000 * 60 * 60 * 24 * 30; // 30 dias
+const UM_MES = 1000 * 60 * 60 * 24 * 30;
 
-function gerarID() {
+async function initialize() {
+    vehicles = await loadVehicles();
+    idCounter = await loadIdCounter();
+}
+
+async function gerarID() {
     idCounter++;
     if (idCounter > 9999) idCounter = 1000;
-    saveIdCounter(idCounter);
+    await saveIdCounter(idCounter);
     return idCounter.toString().padStart(4, '0');
 }
 
-function adicionarCarro(modelo, placa, cor, vaga, isMensalista = false, precoMensal = 0) {
+async function adicionarCarro(modelo, placa, cor, vaga, isMensalista = false, precoMensal = 0) {
     if (!modelo || !placa || !cor || !vaga) {
         alert('Preencha todos os campos obrigatórios!');
         return null;
@@ -32,12 +37,12 @@ function adicionarCarro(modelo, placa, cor, vaga, isMensalista = false, precoMen
         return null;
     }
 
-    if (!isMensalista && vehicles.some(v => v.isMensalista && v.ativo && v.vaga === vaga)) {
+    if (!isMensalista && vehicles.some(v => v.is_mensalista && v.ativo && v.vaga === vaga)) {
         alert('Esta vaga está reservada para um mensalista!');
         return null;
     }
 
-    const novoID = gerarID();
+    const novoID = await gerarID();
     const dataHoraEntrada = new Date().toLocaleString('pt-BR', {
         day: '2-digit',
         month: '2-digit',
@@ -51,12 +56,12 @@ function adicionarCarro(modelo, placa, cor, vaga, isMensalista = false, precoMen
         placa: formatarPlaca(placa.toUpperCase().replace(/-/g, '')),
         cor: cor.toUpperCase(),
         vaga,
-        horaEntrada: dataHoraEntrada, // Agora inclui data e hora
-        entradaTimestamp: new Date().getTime(),
+        hora_entrada: dataHoraEntrada,
+        entrada_timestamp: new Date().getTime(),
         ativo: true,
-        isMensalista,
-        precoMensal: isMensalista ? parseFloat(precoMensal) || 0 : 0,
-        dataInicioMensalista: isMensalista ? new Date().getTime() : null,
+        is_mensalista: isMensalista,
+        preco_mensal: isMensalista ? parseFloat(precoMensal) || 0 : 0,
+        data_inicio_mensalista: isMensalista ? new Date().getTime() : null,
         historico: [{
             entrada: dataHoraEntrada,
             saida: null,
@@ -65,19 +70,19 @@ function adicionarCarro(modelo, placa, cor, vaga, isMensalista = false, precoMen
     };
 
     vehicles.push(newVehicle);
-    saveVehicles(vehicles);
+    await saveVehicles(vehicles);
     return newVehicle;
 }
 
-function verificarMensalistas() {
+async function verificarMensalistas() {
     const agora = new Date().getTime();
-    vehicles.forEach(veiculo => {
-        if (veiculo.isMensalista && veiculo.ativo && veiculo.dataInicioMensalista) {
-            const tempoDecorrido = agora - veiculo.dataInicioMensalista;
+    vehicles.forEach(async veiculo => {
+        if (veiculo.is_mensalista && veiculo.ativo && veiculo.data_inicio_mensalista) {
+            const tempoDecorrido = agora - veiculo.data_inicio_mensalista;
             if (tempoDecorrido >= UM_MES) {
                 alert(`Aviso: O mensalista ${veiculo.placa} (${veiculo.modelo}) na vaga ${veiculo.vaga} completou 1 mês. Nova cobrança será iniciada.`);
-                veiculo.dataInicioMensalista = agora;
-                saveVehicles(vehicles);
+                veiculo.data_inicio_mensalista = agora;
+                await saveVehicles(vehicles);
             }
         }
     });
@@ -88,20 +93,20 @@ function selecionarVeiculo(id) {
     return selectedVehicle;
 }
 
-function editarVaga(id, novaVaga) {
+async function editarVaga(id, novaVaga) {
     const veiculo = vehicles.find(v => v.id === id);
     novaVaga = novaVaga.toString().padStart(2, '0');
 
     if (novaVaga && !vehicles.some(v => v.vaga === novaVaga && v.ativo && v.id !== id)) {
         veiculo.vaga = novaVaga;
-        saveVehicles(vehicles);
+        await saveVehicles(vehicles);
         return true;
     }
     alert('Vaga já ocupada ou inválida!');
     return false;
 }
 
-function registrarSaida() {
+async function registrarSaida() {
     if (!selectedVehicle) {
         alert('Selecione um veículo primeiro!');
         return false;
@@ -116,23 +121,23 @@ function registrarSaida() {
         minute: '2-digit'
     });
 
-    if (veiculo.isMensalista) {
+    if (veiculo.is_mensalista) {
         const confirmar = confirm(
-            `CONFIRMAR SAÍDA:\n\nID: ${veiculo.id}\nPlaca: ${veiculo.placa}\nMensalista - Valor Fixo: R$ ${veiculo.precoMensal.toFixed(2)}\n\nClique em OK para confirmar`
+            `CONFIRMAR SAÍDA:\n\nID: ${veiculo.id}\nPlaca: ${veiculo.placa}\nMensalista - Valor Fixo: R$ ${veiculo.preco_mensal.toFixed(2)}\n\nClique em OK para confirmar`
         );
 
         if (confirmar) {
-            veiculo.historico[veiculo.historico.length - 1].saida = dataHoraSaida; // Inclui data
-            veiculo.historico[veiculo.historico.length - 1].valor = veiculo.precoMensal;
+            veiculo.historico[veiculo.historico.length - 1].saida = dataHoraSaida;
+            veiculo.historico[veiculo.historico.length - 1].valor = veiculo.preco_mensal;
             veiculo.ativo = false;
-            saveVehicles(vehicles);
+            await saveVehicles(vehicles);
             selectedVehicle = null;
             return true;
         }
         return false;
     }
 
-    const tempo = calcularTempo(selectedVehicle.entradaTimestamp);
+    const tempo = calcularTempo(selectedVehicle.entrada_timestamp);
     const valor = calcularValor(tempo.dias, tempo.horas, tempo.minutos);
 
     const confirmar = confirm(
@@ -140,14 +145,14 @@ function registrarSaida() {
     );
 
     if (confirmar) {
-        veiculo.historico[veiculo.historico.length - 1].saida = dataHoraSaida; // Inclui data
+        veiculo.historico[veiculo.historico.length - 1].saida = dataHoraSaida;
         veiculo.historico[veiculo.historico.length - 1].valor = valor;
         veiculo.ativo = false;
-        saveVehicles(vehicles);
+        await saveVehicles(vehicles);
         selectedVehicle = null;
         return true;
     }
     return false;
 }
 
-export { adicionarCarro, selecionarVeiculo, editarVaga, registrarSaida, verificarMensalistas, vehicles, totalVagas, selectedVehicle };
+export { adicionarCarro, selecionarVeiculo, editarVaga, registrarSaida, verificarMensalistas, vehicles, totalVagas, selectedVehicle, initialize };

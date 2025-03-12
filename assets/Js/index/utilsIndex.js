@@ -19,7 +19,7 @@ function calcularTempo(entradaTimestamp) {
 function calcularValor(dias, horas, minutos) {
     const taxaMinima = 5.00;
     const valorHora = 3.00;
-    const valorDia = 60.00; // Novo: valor por dia para pernoites
+    const valorDia = 60.00;
 
     if (dias === 0 && horas === 0 && minutos < 15) return taxaMinima;
     return Math.max(taxaMinima, (dias * valorDia) + (horas * valorHora) + (minutos > 0 ? valorHora : 0));
