@@ -11,11 +11,14 @@ async function renderListaVeiculos() {
     }
     listaVeiculos.innerHTML = '';
 
-    if (vehicles.length === 0) {
-        console.log('Nenhum veículo encontrado no Supabase');
+    // Filtrar apenas veículos ativos ou com histórico
+    const activeVehicles = vehicles.filter(vehicle => vehicle.ativo || vehicle.historico?.length > 0);
+
+    if (activeVehicles.length === 0) {
+        console.log('Nenhum veículo ativo encontrado');
         listaVeiculos.innerHTML = '<p>Nenhum veículo registrado.</p>';
     } else {
-        vehicles.forEach(vehicle => {
+        activeVehicles.forEach(vehicle => {
             const veiculoDiv = document.createElement('div');
             veiculoDiv.classList.add('veiculo-item');
             veiculoDiv.dataset.placa = vehicle.placa;
@@ -28,7 +31,7 @@ async function renderListaVeiculos() {
             `;
             listaVeiculos.appendChild(veiculoDiv);
         });
-        console.log('Lista de veículos renderizada com', vehicles.length, 'itens');
+        console.log('Lista de veículos renderizada com', activeVehicles.length, 'itens');
     }
 }
 

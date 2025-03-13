@@ -39,9 +39,14 @@ async function init() {
             console.log('Botão Apagar Registros encontrado');
             botaoApagarRegistro.addEventListener('click', async () => {
                 console.log('Botão Apagar Registros clicado');
-                await clearStorage();
-                await renderListaVeiculos();
-                await calcularTotalArrecadado();
+                // Adicionando confirmação antes de apagar
+                if (confirm('Tem certeza de que deseja apagar todos os registros? Essa ação não pode ser desfeita.')) {
+                    await clearStorage();
+                    await renderListaVeiculos();
+                    await calcularTotalArrecadado();
+                } else {
+                    console.log('Ação de apagar registros cancelada pelo usuário');
+                }
             });
         } else {
             console.error('Botão Apagar Registros não encontrado');
