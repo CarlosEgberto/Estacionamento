@@ -1,7 +1,7 @@
 import { loadVehicles } from '../index/storageIndex.js';
 import { ultimaEntrada } from './utilsRelatorios.js';
 
-async function renderListaVeiculos(selectedMonth = new Date()) {
+async function renderListaVeiculos() {
     console.log('Renderizando lista de veículos...');
     const vehicles = await loadVehicles();
     const listaVeiculos = document.getElementById('listaVeiculos');
@@ -11,29 +11,11 @@ async function renderListaVeiculos(selectedMonth = new Date()) {
     }
     listaVeiculos.innerHTML = '';
 
-    // Filtrar veículos com base no mês e ano selecionados
-    const selectedMonthIndex = selectedMonth.getMonth(); // 0-11 (janeiro-dezembro)
-    const selectedYear = selectedMonth.getFullYear();
-
-    const filteredVehicles = vehicles.filter(vehicle => {
-        // Se o veículo não tem histórico, não deve ser exibido
-        if (!vehicle.historico || vehicle.historico.length === 0) return false;
-
-        // Verificar se há alguma entrada no histórico que corresponda ao mês e ano selecionados
-        return vehicle.historico.some(entrada => {
-            const entradaDate = new Date(entrada.dataEntrada); // Supondo que "dataEntrada" é o campo no histórico
-            return (
-                entradaDate.getMonth() === selectedMonthIndex &&
-                entradaDate.getFullYear() === selectedYear
-            );
-        });
-    });
-
-    if (filteredVehicles.length === 0) {
-        console.log('Nenhum veículo encontrado para o mês selecionado');
-        listaVeiculos.innerHTML = '<p>Nenhum veículo registrado neste mês.</p>';
+    if (vehicles.length === 0) {
+        console.log('Nenhum veículo encontrado no Supabase');
+        listaVeiculos.innerHTML = '<p>Nenhum veículo registrado.</p>';
     } else {
-        filteredVehicles.forEach(vehicle => {
+        vehicles.forEach(vehicle => {
             const veiculoDiv = document.createElement('div');
             veiculoDiv.classList.add('veiculo-item');
             veiculoDiv.dataset.placa = vehicle.placa;
@@ -46,7 +28,7 @@ async function renderListaVeiculos(selectedMonth = new Date()) {
             `;
             listaVeiculos.appendChild(veiculoDiv);
         });
-        console.log('Lista de veículos renderizada com', filteredVehicles.length, 'itens');
+        console.log('Lista de veículos renderizada com', vehicles.length, 'itens');
     }
 }
 
