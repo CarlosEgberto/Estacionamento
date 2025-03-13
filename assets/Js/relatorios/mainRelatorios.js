@@ -1,6 +1,6 @@
 import { loadVehicles, saveVehicles } from '../index/storageIndex.js';
 import { renderListaVeiculos, filtrarListaVeiculos } from './uiRendererRelatorios.js';
-import { calcularTotalArrecadado, updateTime, toggleDarkMode, checkDarkMode } from './utilsRelatorios.js';
+import { calcularTotalArrecadado, updateTime, toggleDarkMode, checkDarkMode, ultimaEntrada } from './utilsRelatorios.js';
 
 console.log('Relatorios mainRelatorios.js carregado');
 
@@ -17,11 +17,52 @@ async function clearStorage() {
     return success;
 }
 
+// Função para formatar o mês e ano (ex.: "Março 2025")
+function formatMonthYear(date) {
+    const months = [
+        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ];
+    return `${months[date.getMonth()]} ${date.getFullYear()}`;
+}
+
 async function init() {
     console.log('Iniciando Relatorios...');
     try {
-        await calcularTotalArrecadado();
-        await renderListaVeiculos();
+        // Inicializar o carrossel com o mês e ano atuais
+        let currentDate = new Date(); // Março 2025, conforme a data fornecida
+        const currentMonthYear = document.getElementById('currentMonthYear');
+        const prevMonthBtn = document.getElementById('prevMonth');
+        const nextMonthBtn = document.getElementById('nextMonth');
+
+        // Função para atualizar o carrossel e a lista de veículos
+        const updateCarousel = async () => {
+            currentMonthYear.textContent = formatMonthYear(currentDate);
+            await renderListaVeiculos(currentDate);
+            await calcularTotalArrecadado(currentDate); // Passar o mês selecionado para calcular o total
+        };
+
+        // Inicializar o carrossel e a lista
+        await updateCarousel();
+
+        // Eventos para navegar entre os meses
+        if (prevMonthBtn) {
+            prevMonthBtn.addEventListener('click', async () => {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                await updateCarousel();
+            });
+        }
+
+        if (nextMonthBtn) {
+            nextMonthBtn.addEventListener('click', async () => {
+                const now = new Date();
+                if (currentDate.getMonth() < now.getMonth() || currentDate.getFullYear() < now.getFullYear()) {
+                    currentDate.setMonth(currentDate.getMonth() + 1);
+                    await updateCarousel();
+                }
+            });
+        }
+
         updateTime();
 
         const pesquisaPlaca = document.getElementById('pesquisaPlaca');
@@ -39,9 +80,13 @@ async function init() {
             console.log('Botão Apagar Registros encontrado');
             botaoApagarRegistro.addEventListener('click', async () => {
                 console.log('Botão Apagar Registros clicado');
-                await clearStorage();
-                await renderListaVeiculos();
-                await calcularTotalArrecadado();
+                if (confirm('Tem certeza de que deseja apagar todos os registros? Essa ação não pode ser desfeita.')) {
+                    await clearStorage();
+                    await renderListaVeiculos(currentDate);
+                    await calcularTotalArrecadado(currentDate);
+                } else {
+                    console.log('Ação de apagar registros cancelada pelo usuário');
+                }
             });
         } else {
             console.error('Botão Apagar Registros não encontrado');
